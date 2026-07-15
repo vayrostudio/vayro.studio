@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAYRO Studio | Premium Web Design & Development</title>
+    <meta name="description" content="Crafting premium websites for ambitious businesses. Custom design & development. Based in Morocco.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                // Default to light mode as requested
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        bgMain: 'var(--bg-main)',
+                        bgNav: 'var(--bg-nav)',
+                        bgSurface: 'var(--bg-surface)',
+                        bgCard: 'var(--bg-card)',
+                        bgCardAlt: 'var(--bg-card-alt)',
+                        bgIcon: 'var(--bg-icon)',
+                        bgInvert: 'var(--bg-invert)',
+                        bgInvertCard: 'var(--bg-invert-card)',
+                        bgPill: 'var(--bg-pill)',
+                        textMain: 'var(--text-main)',
+                        textSecondary: 'var(--text-secondary)',
+                        textMuted: 'var(--text-muted)',
+                        textInvert: 'var(--text-invert)',
+                        borderLight: 'var(--border-light)',
+                        borderMed: 'var(--border-med)',
+                        borderDark: 'var(--border-dark)',
+                        accent: 'var(--accent)',
+                        heroBlob1: 'var(--hero-blob-1)',
+                        heroBlob2: 'var(--hero-blob-2)',
+                        overlay: 'var(--overlay)'
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Variables System */
+        :root {
+            /* Light Mode (Original Identity) */
+            --bg-main: #FFFFFF;
+            --bg-nav: rgba(255, 255, 255, 0.8);
+            --bg-surface: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --bg-card-alt: #F3F4F6;
+            --bg-icon: #F9FAFB;
+            --bg-invert: #111111;
+            --bg-invert-card: #1F2937;
+            --bg-pill: rgba(255, 255, 255, 0.5);
+
+            --text-main: #111111;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --text-invert: #FFFFFF;
+
+            --border-light: #F3F4F6;
+            --border-med: #E5E7EB;
+            --border-dark: #1F2937;
+
+            --accent: #2563EB;
+            --hero-blob-1: #EFF6FF;
+            --hero-blob-2: #F9FAFB;
+            --overlay: rgba(0, 0, 0, 0.1);
+            --hover-glow: rgba(37, 99, 235, 0.15);
+            --invert-border: #111111;
+        }
+
+        [data-theme="dark"] {
+            /* Premium Dark Mode (Linear / Vercel Vibe) */
+            --bg-main: #050505;
+            --bg-nav: rgba(5, 5, 5, 0.8);
+            --bg-surface: #0D0D0D;
+            --bg-card: #111111;
+            --bg-card-alt: #111111;
+            --bg-icon: #0D0D0D;
+            --bg-invert: #0D0D0D; 
+            --bg-invert-card: #111111; 
+            --bg-pill: rgba(255, 255, 255, 0.05);
+
+            --text-main: #FFFFFF;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --text-invert: #FFFFFF;
+
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-med: rgba(255, 255, 255, 0.08);
+            --border-dark: rgba(255, 255, 255, 0.08);
+
+            --accent: #2563EB;
+            --hero-blob-1: rgba(37, 99, 235, 0.1);
+            --hero-blob-2: rgba(255, 255, 255, 0.03);
+            --overlay: rgba(0, 0, 0, 0.4);
+            --hover-glow: rgba(255, 255, 255, 0.05);
+            --invert-border: #FFFFFF;
+        }
+
+        /* Base & Global Transitions */
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 300ms smooth interpolation on all color properties */
+        body, nav, section, footer, div, a, button, h1, h2, h3, h4, p, span, svg, border {
+            transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+            transition-duration: 300ms;
+            transition-timing-function: ease;
+        }
+
+        /* Scroll Reveal Animations (Overriding transition to prevent conflict) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Premium Hover Glow */
+        .hover-glow:hover {
+            box-shadow: 0 0 20px var(--hover-glow);
+        }
+
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-med);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Custom Selection */
+        ::selection {
+            background-color: var(--accent);
+            color: #FFFFFF;
+        }
+
+        /* Theme Toggle Icon Animations */
+        .theme-icon {
+            transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.4s ease;
+        }
+        .theme-icon-hidden {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.5);
+            pointer-events: none;
+            position: absolute;
+        }
+        .theme-icon-visible {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-accent selection:text-white">
+
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-bgNav backdrop-blur-md border-b border-borderLight" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+            <a href="#" class="group block h-12 w-auto text-black dark:text-white">
+                <svg viewBox="0 0 1408 768" class="h-full w-auto transition-transform duration-300 group-hover:scale-105" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,768.000000) scale(0.100000,-0.100000)"
+                        fill="currentColor"
+                        stroke="none">
+                        <path d="M4870 5594 c0 -4 57 -100 127 -213 70 -113 188 -305 263 -427 364
+                        -594 706 -1144 710 -1143 3 0 17 26 32 58 15 32 58 93 95 136 38 42 73 85 80
+                        94 10 13 -21 69 -189 341 -110 179 -267 433 -348 565 l-148 240 375 3 c246 1
+                        381 -1 393 -8 11 -6 117 -122 236 -258 119 -136 220 -248 224 -250 6 -2 104
+                        105 218 240 13 15 1 32 -119 170 -266 307 -309 354 -356 385 -106 72 -58 68
+                        -865 71 -401 1 -728 0 -728 -4z"/>
+                        
+                        <path d="M7755 5586 c-82 -20 -146 -60 -221 -138 -73 -75 -116 -124 -660 -753
+                        -177 -203 -410 -471 -519 -595 -231 -263 -250 -294 -250 -415 0 -66 5 -90 26
+                        -135 15 -30 127 -217 250 -415 123 -199 321 -517 439 -708 118 -190 217 -346
+                        220 -347 3 0 17 19 31 43 15 23 154 247 309 497 156 250 346 556 423 680 78
+                        124 150 250 160 280 25 71 19 175 -12 241 -19 40 -588 706 -596 697 -1 -2 -53
+                        -61 -114 -133 -61 -71 -110 -132 -109 -136 2 -4 109 -127 238 -274 129 -147
+                        239 -275 244 -285 7 -15 -18 -62 -115 -217 -110 -178 -360 -581 -428 -690 -14
+                        -24 -28 -43 -31 -43 -3 0 -57 85 -120 187 -204 331 -225 365 -344 557 -64 104
+                        -115 194 -112 201 2 6 116 140 252 296 137 157 330 379 429 494 471 547 666
+                        765 687 770 13 3 188 4 389 3 l367 -3 -252 -410 c-139 -225 -293 -477 -344
+                        -559 -51 -82 -92 -154 -92 -160 0 -6 28 -42 62 -81 70 -79 124 -160 134 -199
+                        3 -14 10 -26 14 -26 4 0 52 73 107 163 55 89 243 394 418 677 175 283 348 565
+                        385 625 37 61 97 158 133 218 l67 107 -707 -1 c-528 0 -721 -4 -758 -13z"/>
+                    </g>
+                </svg>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center text-sm font-medium text-textSecondary">
+                <a href="#about" class="hover:text-textMain transition-colors">Philosophy</a>
+                <a href="#work" class="hover:text-textMain transition-colors">Work</a>
+                <a href="#services" class="hover:text-textMain transition-colors">Expertise</a>
+                <a href="#contact" class="bg-textMain text-bgMain px-6 py-2.5 rounded-full hover:opacity-90 transition-all hover:scale-105 active:scale-95">Let's Talk</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="relative flex items-center justify-center w-10 h-10 rounded-full bg-bgIcon border border-borderLight text-textSecondary hover:text-textMain hover:bg-bgCardAlt transition-colors focus:outline-none" aria-label="Toggle Theme">
+                    <svg id="icon-sun" class="theme-icon absolute w-5 h-5 theme-icon-hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+                    <svg id="icon-moon" class="theme-icon absolute w-5 h-5 theme-icon-visible" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+
+                <button class="md:hidden text-textMain focus:outline-none" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="md:hidden hidden bg-bgMain border-t border-borderLight absolute w-full" id="mobile-menu">
+            <div class="px-6 pt-4 pb-6 space-y-4 shadow-lg border-b border-borderLight">
+                <a href="#about" class="block text-textSecondary font-medium">Philosophy</a>
+                <a href="#work" class="block text-textSecondary font-medium">Work</a>
+                <a href="#services" class="block text-textSecondary font-medium">Expertise</a>
+                <a href="#contact" class="block bg-textMain text-bgMain text-center px-6 py-3 rounded-full font-medium">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-heroBlob1 rounded-full filter blur-3xl opacity-70 animate-blob"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-heroBlob2 rounded-full filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center reveal">
+            <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-borderMed text-xs font-semibold tracking-wide text-textSecondary uppercase bg-bgPill backdrop-blur-sm">
+                Digital Craftsmanship
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.1] mb-8 text-textMain">
+                Premium websites that help businesses <span class="text-transparent bg-clip-text bg-gradient-to-r from-textMain to-textMuted">stand out.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-textSecondary mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                We design and develop custom-coded websites that elevate local brands into global experiences. Quality over quantity. Simplicity over complexity.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#work" class="bg-textMain text-bgMain px-8 py-4 rounded-full font-medium hover:opacity-90 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+                    View Projects
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+                <a href="#contact" class="bg-bgMain text-textMain border border-borderMed px-8 py-4 rounded-full font-medium hover:border-textMuted transition-all hover:bg-bgCardAlt flex items-center justify-center">
+                    Let's Talk
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 bg-bgSurface">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="text-sm font-bold tracking-widest uppercase text-accent mb-4">Our Philosophy</h2>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight text-textMain">We don’t build templates.<br>We craft digital identities.</h3>
+                    <p class="text-textSecondary mb-6 text-lg font-light leading-relaxed">
+                        VAYRO Studio is not a traditional marketing agency. We are a modern digital brand focused exclusively on high-end, custom-coded environments. 
+                    </p>
+                    <p class="text-textSecondary text-lg font-light leading-relaxed">
+                        We believe that your online presence should be an investment, not an afterthought. By stripping away visual clutter and relying on precise geometry, typography, and purposeful motion, we create websites that command authority and trust.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 reveal delay-200">
+                    <div class="bg-bgCard p-8 rounded-2xl shadow-sm border border-borderLight hover-glow transition-all">
+                        <div class="w-10 h-10 bg-bgIcon rounded-lg flex items-center justify-center mb-6 text-accent">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-textMain text-lg mb-2">Custom Code</h4>
+                        <p class="text-textSecondary text-sm">Pixel-perfect development from scratch. No bloated frameworks.</p>
+                    </div>
+                    <div class="bg-bgCard p-8 rounded-2xl shadow-sm border border-borderLight hover-glow transition-all translate-y-8">
+                        <div class="w-10 h-10 bg-bgIcon rounded-lg flex items-center justify-center mb-6 text-accent">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-textMain text-lg mb-2">Performance</h4>
+                        <p class="text-textSecondary text-sm">Lightning-fast load times optimized for modern search engines.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-20 text-center reveal">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-accent mb-4">Selected Work</h2>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-textMain">Transforming local business<br>into premium brands.</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a href="https://vayrostudio.github.io/TheLvb/" class="group block reveal">
+                    <div class="relative overflow-hidden rounded-2xl bg-bgCardAlt aspect-[4/3] mb-6">
+                        <img src="Images/gym.png" alt="Gym Website" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-textSecondary uppercase tracking-wider mb-2">Fitness & Wellness</p>
+                            <h4 class="text-2xl font-bold text-textMain mb-2">Iron Aesthetics</h4>
+                            <p class="text-textSecondary font-light text-sm">High-performance digital interface for a premium strength facility.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border border-borderMed flex items-center justify-center group-hover:bg-textMain group-hover:text-bgMain transition-colors text-textMain">
+                            <svg class="w-4 h-4 transform -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://vayrostudio.github.io/LosHermanos-barber/" class="group block reveal delay-200 md:mt-16">
+                    <div class="relative overflow-hidden rounded-2xl bg-bgCardAlt aspect-[4/3] mb-6">
+                        <img src="Images/barber.png" alt="Barbershop Website" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-in-out filter grayscale hover:grayscale-0">
+                        <div class="absolute inset-0 bg-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-textSecondary uppercase tracking-wider mb-2">ming</p>
+                            <h4 class="text-2xl font-bold text-textMain mb-2">The Minimalist Barber</h4>
+                            <p class="text-textSecondary font-light text-sm">Dark-mode editorial design and seamless booking experience.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border border-borderMed flex items-center justify-center group-hover:bg-textMain group-hover:text-bgMain transition-colors text-textMain">
+                            <svg class="w-4 h-4 transform -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://vayrostudio.github.io/Gili-kitchen/" class="group block reveal">
+                    <div class="relative overflow-hidden rounded-2xl bg-bgCardAlt aspect-[4/3] mb-6">
+                        <img src="Images/coffeshop.png" alt="Café Website" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-textSecondary uppercase tracking-wider mb-2">Hospitality</p>
+                            <h4 class="text-2xl font-bold text-textMain mb-2">Noir Coffee Roasters</h4>
+                            <p class="text-textSecondary font-light text-sm">Immersive visual storytelling for a specialty coffee brand.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border border-borderMed flex items-center justify-center group-hover:bg-textMain group-hover:text-bgMain transition-colors text-textMain">
+                            <svg class="w-4 h-4 transform -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                    </div>
+                </a>
+
+                 <a href="https://vayrostudio.github.io/La-Jonquille/" class="group block reveal delay-200 md:mt-16">
+                    <div class="relative overflow-hidden rounded-2xl bg-bgCardAlt aspect-[4/3] mb-6">
+                        <img src="Images/school.png" alt="School Website" class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-overlay group-hover:bg-transparent transition-colors duration-500"></div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-textSecondary uppercase tracking-wider mb-2">Early Education & Care</p>
+                            <h4 class="text-2xl font-bold text-textMain mb-2">Educational Ecosystem</h4>
+                            <p class="text-textSecondary font-light text-sm">An approachable, soft-toned experience designed to bridge the gap between busy parents and educational excellence.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full border border-borderMed flex items-center justify-center group-hover:bg-textMain group-hover:text-bgMain transition-colors text-textMain">
+                            <svg class="w-4 h-4 transform -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="mt-20 text-center reveal">
+                <a href="#contact" class="inline-flex items-center gap-2 font-medium text-textMain border-b border-textMain pb-1 hover:text-textSecondary hover:border-textSecondary transition-colors">
+                    Start a Project <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 bg-bgInvert text-textInvert">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-16 reveal">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-textMuted mb-4">Core Expertise</h2>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-textInvert">Digital craftsmanship<br>from start to finish.</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 border border-borderDark rounded-2xl hover:bg-bgInvertCard transition-colors reveal">
+                    <h4 class="text-xl font-bold mb-4 text-textInvert">Premium Web Design</h4>
+                    <p class="text-textMuted font-light text-sm leading-relaxed">Editorial-style layouts, perfect typography hierarchy, and intuitive user experiences that convert visitors into loyal clients.</p>
+                </div>
+                <div class="p-8 border border-borderDark rounded-2xl hover:bg-bgInvertCard transition-colors reveal delay-100">
+                    <h4 class="text-xl font-bold mb-4 text-textInvert">Custom Development</h4>
+                    <p class="text-textMuted font-light text-sm leading-relaxed">Hand-coded HTML, Tailwind CSS, and vanilla JS. We don't rely on bloated site builders, ensuring ultimate speed and security.</p>
+                </div>
+                <div class="p-8 border border-borderDark rounded-2xl hover:bg-bgInvertCard transition-colors reveal delay-200">
+                    <h4 class="text-xl font-bold mb-4 text-textInvert">SEO Foundations</h4>
+                    <p class="text-textMuted font-light text-sm leading-relaxed">Built from the ground up with semantic code, lightning-fast load times, and structured data to dominate local search rankings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-accent mb-4">The Process</h2>
+                <h3 class="text-3xl md:text-4xl font-bold tracking-tight text-textMain">Structured for excellence.</h3>
+            </div>
+
+            <div class="relative border-l border-borderMed ml-3 md:ml-6 space-y-12 pb-4">
+                <div class="relative pl-8 md:pl-12 reveal">
+                    <div class="absolute w-6 h-6 bg-bgMain border-2 border-invert-border rounded-full -left-[13px] top-1"></div>
+                    <span class="text-accent font-bold text-sm tracking-widest mb-1 block">01</span>
+                    <h4 class="text-2xl font-bold mb-2 text-textMain">Discovery & Strategy</h4>
+                    <p class="text-textSecondary font-light">Understanding your business goals, analyzing competitors, and defining the precise architecture needed to outclass them.</p>
+                </div>
+                <div class="relative pl-8 md:pl-12 reveal">
+                    <div class="absolute w-6 h-6 bg-bgMain border-2 border-borderMed rounded-full -left-[13px] top-1"></div>
+                    <span class="text-textMuted font-bold text-sm tracking-widest mb-1 block">02</span>
+                    <h4 class="text-2xl font-bold mb-2 text-textMain">Visual Direction</h4>
+                    <p class="text-textSecondary font-light">Crafting the digital identity. We focus on minimalist, high-end aesthetics tailored perfectly to your premium positioning.</p>
+                </div>
+                <div class="relative pl-8 md:pl-12 reveal">
+                    <div class="absolute w-6 h-6 bg-bgMain border-2 border-borderMed rounded-full -left-[13px] top-1"></div>
+                    <span class="text-textMuted font-bold text-sm tracking-widest mb-1 block">03</span>
+                    <h4 class="text-2xl font-bold mb-2 text-textMain">Custom Development</h4>
+                    <p class="text-textSecondary font-light">Translating design into flawless code. Implementing smooth micro-interactions and ensuring perfect responsiveness.</p>
+                </div>
+                <div class="relative pl-8 md:pl-12 reveal">
+                    <div style="border-color: var(--invert-border)" class="absolute w-6 h-6 bg-textMain border-2 rounded-full -left-[13px] top-1"></div>
+                    <span class="text-textMuted font-bold text-sm tracking-widest mb-1 block">04</span>
+                    <h4 class="text-2xl font-bold mb-2 text-textMain">Launch & Scale</h4>
+                    <p class="text-textSecondary font-light">Rigorous testing across all devices. We deploy your new platform and provide the foundations for continuous digital growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-bgSurface">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-3xl md:text-4xl font-bold tracking-tight text-textMain">Common Questions</h3>
+            </div>
+
+            <div class="space-y-4 reveal delay-100">
+                <div class="border border-borderMed rounded-xl bg-bgCard overflow-hidden">
+                    <button class="w-full text-left px-6 py-5 font-semibold text-textMain flex justify-between items-center faq-toggle">
+                        Do you use WordPress or generic templates?
+                        <svg class="w-5 h-5 text-textMuted transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-6 pb-5 hidden text-textSecondary font-light text-sm faq-content">
+                        No. We believe in digital craftsmanship. Every website is custom-coded from the ground up using modern web technologies to ensure optimal performance, security, and a truly unique design that templates cannot offer.
+                    </div>
+                </div>
+                <div class="border border-borderMed rounded-xl bg-bgCard overflow-hidden">
+                    <button class="w-full text-left px-6 py-5 font-semibold text-textMain flex justify-between items-center faq-toggle">
+                        How long does a typical project take?
+                        <svg class="w-5 h-5 text-textMuted transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-6 pb-5 hidden text-textSecondary font-light text-sm faq-content">
+                        A custom website usually takes between 4 to 8 weeks from initial discovery to final launch, depending on the complexity of the design and the required features.
+                    </div>
+                </div>
+                <div class="border border-borderMed rounded-xl bg-bgCard overflow-hidden">
+                    <button class="w-full text-left px-6 py-5 font-semibold text-textMain flex justify-between items-center faq-toggle">
+                        Do you provide ongoing support?
+                        <svg class="w-5 h-5 text-textMuted transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-6 pb-5 hidden text-textSecondary font-light text-sm faq-content">
+                        Yes. We offer premium maintenance packages to ensure your website remains fast, secure, and up-to-date long after the initial launch.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 text-center reveal bg-bgMain">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-8 text-textMain">Let's build something <span class="text-transparent bg-clip-text bg-gradient-to-r from-textMain to-textMuted">exceptional.</span></h2>
+            <p class="text-xl text-textSecondary font-light mb-12">Now booking select projects for 2026. Elevate your brand presence today.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16">
+                <a href="mailto:vayro.web@gmail.com" class="bg-textMain text-bgMain px-8 py-4 rounded-full font-medium hover:opacity-90 transition-all hover:scale-105 active:scale-95 text-lg">
+                    vayro.web@gmail.com
+                </a>
+            </div>
+            
+            <div class="flex justify-center space-x-8 text-sm font-medium text-textSecondary">
+                <a href="https://www.instagram.com/vayro.studio/" class="hover:text-textMain transition-colors">Instagram</a>
+                <a href="https://wa.me/212632380750" class="hover:text-textMain transition-colors">WhatsApp</a>
+                <a href="https://github.com/vayrostudio" class="hover:text-textMain transition-colors">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-borderLight py-12 bg-bgMain">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-xl tracking-tighter flex items-center gap-1">
+                <span class="font-extrabold text-textMain">VAYRO</span>
+                <span class="font-light text-textSecondary">Studio</span>
+            </div>
+            <div class="text-sm text-textMuted font-light">
+                &copy; 2026 VAYRO Studio. Based in Morocco. Available Worldwide.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Switcher Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+
+        function syncThemeIcons(theme) {
+            if (theme === 'dark') {
+                iconSun.classList.replace('theme-icon-hidden', 'theme-icon-visible');
+                iconMoon.classList.replace('theme-icon-visible', 'theme-icon-hidden');
+            } else {
+                iconMoon.classList.replace('theme-icon-hidden', 'theme-icon-visible');
+                iconSun.classList.replace('theme-icon-visible', 'theme-icon-hidden');
+            }
+        }
+
+        // Run once on load to establish correct icon
+        syncThemeIcons(document.documentElement.getAttribute('data-theme'));
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            syncThemeIcons(newTheme);
+        });
+
+        // Smooth Scroll Reveal using Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // FAQ Accordion Logic
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('svg');
+                
+                // Close all others
+                document.querySelectorAll('.faq-content').forEach(item => {
+                    if(item !== content) {
+                        item.classList.add('hidden');
+                        item.previousElementSibling.querySelector('svg').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Toggle current
+                content.classList.toggle('hidden');
+                if(!content.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar blur effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-sm');
+                navbar.classList.replace('py-5', 'py-3');
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.classList.replace('py-3', 'py-5');
+            }
+        });
+    </script>
+</body>
+</html>
